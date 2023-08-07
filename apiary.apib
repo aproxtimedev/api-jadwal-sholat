@@ -1,0 +1,74 @@
+FORMAT: 1A
+HOST: https://api-jadwal-sholat.vercel.app
+
+# Jadwal Sholat
+
+Menyediakan jadwal sholat yang diambil dari website Kemenag. 
+
+## Provinsi [/api/provinsi]
+
+### Daftar Provinsi [GET]
+
+Menyediakan data daftar provinsi yang digunakan sebagai kunci pencarian nantinya
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "unique id",
+                    "name": "province name"
+                }
+            ]
+        }
+
+## Kota [/api/kota?provinsi={provinsi}]
+
+### Daftar Kota [GET]
+
+Menyediakan data daftar kota yang digunakan sebagai kunci pencarian nantinya
+
++ Parameters
+    + provinsi (string) - Nama provinsi yang akan diambil daftar kotanya. Spasi bisa diubah menggunakan `+`
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "unique id",
+                    "name": "city name"
+                }
+            ]
+        }
+
+## Cari [/api/cari?provinsi={provinsi}&kota={kota}&bulan={bulan}&tahun={tahun}]
+
+### Daftar Jadwal Sholat [GET]
+
+Pencarian jadwal sholat berdasarkan bulan dan tahun
+
++ Parameters
+    + provinsi (string) - Nama provinsi yang dari kota yang dicari. Spasi bisa diubah menggunakan `+`
+    + kota (string) - Nama kota yang akan dicari jadwal sholatnya. Spasi bisa diubah menggunakan `+`
+    + bulan (integer) - Bulan dari jadwal yang akan dicari
+    + tahun (integer) - Tahun dari jadwal yang akan dicari
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "key": "YYYY-MM-DD",
+                    "tanggal": "Day of week, DD/MM/YYYY",
+                    "imsak": "HH:MM",
+                    "subuh": "HH:MM",
+                    "terbit": "HH:MM",
+                    "dhuha": "HH:MM",
+                    "dzuhur": "HH:MM",
+                    "ashar": "HH:MM",
+                    "maghrib": "HH:MM",
+                    "isya": "HH:MM"
+                }
+            ]
+        }
